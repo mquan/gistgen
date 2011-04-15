@@ -23,8 +23,8 @@ module Gistgen
         text = @json['overview'].gsub(/\u003C(.*?)\\u003E/,'').gsub(/<(.*?)>/,'').gsub("\n",'')
         text = HTMLEntities.new.decode(text) #decode_html
         text.extract_passage(0, length)
-      #rescue
-      #  nil
+      rescue
+        nil
       end
     end
     
