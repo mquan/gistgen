@@ -16,7 +16,7 @@ module Gistgen
     def self.get_score(reddit_url)
       begin
         res = Gistgen::Page.get_page("#{reddit_url.gsub(/\/$/,'')}/.json")
-        score = res.scan(/"score"\s*:\s*(\d+)/)[0] #reddit nested comments is too deep for json
+        score = res.scan(/"score"\s*:\s*(\d+)/)[0].join('').to_i #reddit nested comments is too deep for json
       rescue
         nil
       end
