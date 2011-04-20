@@ -17,8 +17,6 @@ module Gistgen
       end   
     end
     
-    #add method returning hash of everything for a resource
-    
     def overview(length=500)
       begin
         text = @json['overview'].gsub(/\u003C(.*?)\\u003E/,'').gsub(/<(.*?)>/,'').gsub("\n",'')

@@ -11,5 +11,9 @@ module Gistgen
       #make sure google.com and google.com/ are the same thing
       u3 = (u2.match(/^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?$/ix))? "#{u2}/" : u2
     end
+    
+    def self.is_valid(url)
+      url.match(/^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}((:[0-9]{1,5})?\/.*)?$/ix)
+    end
   end
 end
