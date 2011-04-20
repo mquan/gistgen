@@ -3,11 +3,10 @@ require 'htmlentities'
 
 require "gistgen/page"
 require "gistgen/string"
+require "gistgen/url"
 
 module Gistgen
-  class CrunchView
-    @json
-    
+  class CrunchView    
     def initialize(name)
       begin
         res = Gistgen::Page.get_page("http://api.crunchbase.com/v/1/company/#{name}.js")
@@ -17,6 +16,8 @@ module Gistgen
         nil
       end   
     end
+    
+    #add method returning hash of everything for a resource
     
     def overview(length=500)
       begin
@@ -30,18 +31,14 @@ module Gistgen
     
     def permalink
       begin
-        "http://www.crunchbase.com/company/#{@json['permalink']}"
+        Gistgen::URL.standardize("http://www.crunchbase.com/company/#{@json['permalink']}")
       rescue
         nil
       end
     end
 
     def homepage
-      begin
-        @json['homepage_url']
-      rescue
-        "http://#{site}"
-      end
+      (@json)? Gistgen::URL.standardize(@json['homepage_url']) : nil
     end
     
   end
