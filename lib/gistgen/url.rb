@@ -12,8 +12,20 @@ module Gistgen
       u3 = (u2.match(/^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?$/ix))? "#{u2}/" : u2
     end
     
-    def self.is_valid(url)
+    def self.is_valid?(url)
       url.match(/^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}((:[0-9]{1,5})?\/.*)?$/ix)
+    end
+    
+    def self.is_image?(url)
+      url.match(/\.(?:jpg|jpeg|png|gif|tiff|raw|bmp|webp|ai|psd|svg)$/i)
+    end
+    
+    def self.is_multimedia?(url)
+      url.match(/\.(?:js|css|mp3|swf|wmv|mov|doc|pdf|ppt|xls|xlsx|docx|eps|ps|ttf|xml)$/i)
+    end
+    
+    def self.is_root?(url)
+      url.match(/^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?\/$/ix) #and url.split('.').size == 2
     end
   end
 end
